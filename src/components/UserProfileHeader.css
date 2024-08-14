@@ -1,6 +1,5 @@
-@charset "UTF-8";
 .user-profile-header {
-  margin-left: 20px; /* Ajoutez un espacement à gauche selon votre maquette */
+  margin-left: 20px;
 }
 .user-profile-header__greeting {
   color: #000;
@@ -11,7 +10,7 @@
   line-height: 48px;
 }
 .user-profile-header__greeting span {
-  color: #FF0101; /* Couleur du prénom */
+  color: #FF0101;
 }
 .user-profile-header__message {
   color: #000;
@@ -19,6 +18,6 @@
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
-  line-height: 24px; /* 133.333% */
-  margin-top: 10px; /* Ajustez cet espacement si nécessaire */
+  line-height: 24px;
+  margin-top: 10px;
 }/*# sourceMappingURL=UserProfileHeader.css.map */
