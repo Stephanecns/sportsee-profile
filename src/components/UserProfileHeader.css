@@ -1,0 +1,24 @@
+@charset "UTF-8";
+.user-profile-header {
+  margin-left: 20px; /* Ajoutez un espacement à gauche selon votre maquette */
+}
+.user-profile-header__greeting {
+  color: #000;
+  font-family: "Roboto", sans-serif;
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 48px;
+}
+.user-profile-header__greeting span {
+  color: #FF0101; /* Couleur du prénom */
+}
+.user-profile-header__message {
+  color: #000;
+  font-family: "Roboto", sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px; /* 133.333% */
+  margin-top: 10px; /* Ajustez cet espacement si nécessaire */
+}/*# sourceMappingURL=UserProfileHeader.css.map */

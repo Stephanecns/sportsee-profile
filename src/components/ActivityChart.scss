@@ -1,0 +1,20 @@
+.activity-chart {
+    border-radius: 5px;
+    background: #FBFBFB;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
+    padding: 20px;
+
+    .recharts-legend-wrapper {
+        right: 50px !important;
+        top: -39px !important;
+      }
+  
+    &__title {
+      font-family: Roboto, sans-serif;
+      font-size: 18px;
+      font-weight: 500;
+      color: #20253A;
+      margin-bottom: 20px;
+    }
+  }
+  

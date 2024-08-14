@@ -1,0 +1,17 @@
+.performance-radar-chart {
+    background: #282D30;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
+    padding: 20px;
+  
+    .recharts-polar-angle-axis-tick {
+      fill: #FFF;
+      text-align: center;
+      font-family: Roboto;
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 24px;
+    }
+  }
+  

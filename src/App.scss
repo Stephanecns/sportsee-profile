@@ -1,0 +1,28 @@
+.App__layout {
+  display: flex;
+}
+
+.App__sidebar {
+  width: 90px; 
+}
+
+.App__main {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #f5f5f5; 
+}
+
+.App__charts-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.chart-container {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.chart-container:last-child {
+  margin-right: 0;
+}

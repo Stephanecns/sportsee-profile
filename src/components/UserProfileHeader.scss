@@ -1,0 +1,27 @@
+.user-profile-header {
+    margin-left: 20px; 
+  
+    &__greeting {
+      color: #000;
+      font-family: 'Roboto', sans-serif;
+      font-size: 48px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 48px;
+      
+      span {
+        color: #FF0101; 
+      }
+    }
+  
+    &__message {
+      color: #000;
+      font-family: 'Roboto', sans-serif;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 24px; 
+      margin-top: 10px; 
+    }
+  }
+  

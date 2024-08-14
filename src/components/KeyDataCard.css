@@ -1,0 +1,36 @@
+.key-data {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.key-data__card {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  border-radius: 5px;
+  background: #FBFBFB;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.02);
+}
+
+.key-data__card img {
+  width: 60px;
+  height: 60px;
+  margin-right: 20px;
+}
+
+.key-data__value {
+  color: #282D30;
+  font-family: Roboto, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.key-data__label {
+  color: #74798C;
+  font-family: Roboto, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+}/*# sourceMappingURL=KeyDataCard.css.map */
