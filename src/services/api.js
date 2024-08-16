@@ -1,10 +1,13 @@
+//permet de séparer la logique de récupération des données du reste de votre application. Plutôt que d'avoir des appels fetch dispersés dans vos composants React, vous centralisez ces appels dans un service, ce qui rend votre code plus organisé et plus facile à maintenir.
+// src/services/api.js
+
 // src/services/api.js
 import {
   USER_MAIN_DATA,
   USER_ACTIVITY,
   USER_AVERAGE_SESSIONS,
   USER_PERFORMANCE
-} from '../services/mockData'; // Importer les données mockées
+} from '../services/mockData.js'; // Importer les données mockées
 
 const API_URL = 'http://localhost:3000'; // URL de base de votre API
 
@@ -15,7 +18,7 @@ const standardizeUserData = (data) => {
     firstName: data.userInfos.firstName,
     lastName: data.userInfos.lastName,
     age: data.userInfos.age,
-    score: data.todayScore || data.score,
+    score: data.todayScore || data.score, // Gestion des différences de nom de propriété
     keyData: data.keyData,
   };
 };
@@ -28,12 +31,16 @@ export const fetchUserData = async (userId) => {
       throw new Error('Failed to fetch user data');
     }
     const rawData = await response.json();
-    return standardizeUserData(rawData.data); // Accès aux données via .data
+    return standardizeUserData(rawData.data); // Standardisation avant de retourner les données
   } catch (error) {
-    console.error('Error fetching user data:', error);
-    // Utiliser les données mockées en cas d'échec
+    console.error('Error fetching user data from API:', error);
+    // Utilisation des données mockées en cas de défaillance de l'API
     const mockData = USER_MAIN_DATA.find(user => user.id === userId);
-    return standardizeUserData(mockData);
+    if (mockData) {
+      return standardizeUserData(mockData);
+    } else {
+      throw new Error('Mock data not found');
+    }
   }
 };
 
@@ -45,12 +52,16 @@ export const fetchUserActivity = async (userId) => {
       throw new Error('Failed to fetch user activity');
     }
     const rawData = await response.json();
-    return rawData.data.sessions; // Accès aux données via .data
+    return rawData.data; // Retourne les données de l'API
   } catch (error) {
-    console.error('Error fetching user activity:', error);
-    // Utiliser les données mockées en cas d'échec
+    console.error('Error fetching user activity from API:', error);
+    // Utilisation des données mockées en cas de défaillance de l'API
     const mockData = USER_ACTIVITY.find(activity => activity.userId === userId);
-    return mockData.sessions;
+    if (mockData) {
+      return { data: mockData };
+    } else {
+      throw new Error('Mock activity data not found');
+    }
   }
 };
 
@@ -62,12 +73,16 @@ export const fetchUserAverageSessions = async (userId) => {
       throw new Error('Failed to fetch user average sessions');
     }
     const rawData = await response.json();
-    return rawData.data.sessions; // Accès aux données via .data
+    return rawData.data; // Retourne les données de l'API
   } catch (error) {
-    console.error('Error fetching user average sessions:', error);
-    // Utiliser les données mockées en cas d'échec
+    console.error('Error fetching user average sessions from API:', error);
+    // Utilisation des données mockées en cas de défaillance de l'API
     const mockData = USER_AVERAGE_SESSIONS.find(session => session.userId === userId);
-    return mockData.sessions;
+    if (mockData) {
+      return { data: mockData };
+    } else {
+      throw new Error('Mock average sessions data not found');
+    }
   }
 };
 
@@ -79,14 +94,15 @@ export const fetchUserPerformance = async (userId) => {
       throw new Error('Failed to fetch user performance');
     }
     const rawData = await response.json();
-    return rawData.data; // Accès aux données via .data
+    return rawData.data; // Retourne les données de l'API
   } catch (error) {
-    console.error('Error fetching user performance:', error);
-    // Utiliser les données mockées en cas d'échec
+    console.error('Error fetching user performance from API:', error);
+    // Utilisation des données mockées en cas de défaillance de l'API
     const mockData = USER_PERFORMANCE.find(performance => performance.userId === userId);
-    return {
-      kind: mockData.kind,
-      data: mockData.data
-    };
+    if (mockData) {
+      return { data: mockData };
+    } else {
+      throw new Error('Mock performance data not found');
+    }
   }
 };
