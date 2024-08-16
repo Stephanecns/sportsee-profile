@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles/global.scss';
 import Navbar from './components/navBar.js';
 import Sidebar from './components/sideBar.js'; 
 import UserProfileHeader from './components/UserProfileHeader';

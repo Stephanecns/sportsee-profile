@@ -1,12 +1,14 @@
  //Affiche un BarChart pour l'activité quotidienne (poids et calories brûlées).
  import React, { useEffect, useState } from 'react';
+ // Importation des composants nécessaires de la librairie Recharts pour créer le graphique
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { fetchUserActivity } from '../services/api';
 import './ActivityChart.scss';
 
+// Déclaration du composant fonctionnel `ActivityChart` qui prend `userId` comme prop
 const ActivityChart = ({ userId }) => {
   const [activityData, setActivityData] = useState([]);
-
+  // Utilisation du hook `useEffect` pour effectuer une action au montage du composant
   useEffect(() => {
     const getActivityData = async () => {
       try {
@@ -21,7 +23,8 @@ const ActivityChart = ({ userId }) => {
     };
 
     getActivityData();
-  }, [userId]);
+  }, [userId]); // Le tableau de dépendances inclut `userId`, donc ce code s'exécutera chaque fois que `userId` change
+
 
   return (
     <div className="activity-chart">

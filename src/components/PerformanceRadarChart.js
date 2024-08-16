@@ -11,6 +11,7 @@ const PerformanceRadarChart = ({ userId }) => {
       try {
         const response = await fetchUserPerformance(userId);
         console.log("Fetched Performance Data:", response);
+            // Formatage des données pour les adapter au RadarChart
         if (response && response.data && response.data.kind && response.data.data) {
           const formattedData = response.data.data.map(item => ({
             value: item.value,

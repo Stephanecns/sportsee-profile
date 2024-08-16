@@ -10,11 +10,13 @@ const KeyData = ({ userId }) => {
   const [keyData, setKeyData] = useState({});
 
   useEffect(() => {
+        // Fonction asynchrone pour récupérer les données utilisateur
     const getUserData = async () => {
       try {
         const data = await fetchUserData(userId);
         setKeyData(data.keyData);
       } catch (error) {
+        // Gestion des erreurs potentielles lors de la récupération des données
         console.error('Error fetching key data:', error);
       }
     };

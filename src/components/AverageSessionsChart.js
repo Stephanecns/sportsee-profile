@@ -3,7 +3,9 @@ import { LineChart, Line, XAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { fetchUserAverageSessions } from '../services/api'; 
 import './AverageSessionsChart.scss';
 
+// Déclaration du composant fonctionnel `AverageSessionChart` qui prend `userId` comme prop
 const AverageSessionChart = ({ userId }) => {
+  // Déclaration de l'état `sessionData` qui stockera les données de la durée moyenne des sessions
   const [sessionData, setSessionData] = useState([]);
 
   useEffect(() => {
@@ -22,7 +24,7 @@ const AverageSessionChart = ({ userId }) => {
     getSessionData();
   }, [userId]);
 
-  // Custom Tooltip
+  // Fonction personnalisée pour afficher un tooltip (info-bulle) lorsque l'utilisateur survole les points du graphique
   const CustomTooltip = ({ active, payload }) => {
     if (active && payload && payload.length) {
       return (
