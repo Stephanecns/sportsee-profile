@@ -11,18 +11,17 @@ const AverageSessionChart = ({ userId }) => {
   useEffect(() => {
     const getSessionData = async () => {
       try {
-        const response = await fetchUserAverageSessions(userId);
-        console.log("Fetched Session Data:", response);
-        if (response && response.data && response.data.sessions) {
-          setSessionData(response.data.sessions);
-        }
+        const sessions = await fetchUserAverageSessions(userId);
+        console.log("Fetched Session Data:", sessions);
+        setSessionData(sessions);
       } catch (error) {
         console.error('Error fetching session data:', error);
       }
     };
-
+  
     getSessionData();
   }, [userId]);
+  
 
   // Fonction personnalisée pour afficher un tooltip (info-bulle) lorsque l'utilisateur survole les points du graphique
   const CustomTooltip = ({ active, payload }) => {

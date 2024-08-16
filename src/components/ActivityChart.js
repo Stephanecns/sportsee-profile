@@ -12,19 +12,18 @@ const ActivityChart = ({ userId }) => {
   useEffect(() => {
     const getActivityData = async () => {
       try {
-        const response = await fetchUserActivity(userId);
-        console.log("Fetched Activity Data:", response); 
-        if (response && response.data && response.data.sessions) {
-          setActivityData(response.data.sessions);
-        }
+        const sessions = await fetchUserActivity(userId);
+        console.log("Fetched Activity Data:", sessions);
+        setActivityData(sessions);
       } catch (error) {
         console.error('Error fetching activity data:', error);
       }
     };
-
+  
     getActivityData();
-  }, [userId]); // Le tableau de dépendances inclut `userId`, donc ce code s'exécutera chaque fois que `userId` change
-
+  }, [userId]);
+  
+  
 
   return (
     <div className="activity-chart">

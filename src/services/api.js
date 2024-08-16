@@ -1,7 +1,3 @@
-//permet de séparer la logique de récupération des données du reste de votre application. Plutôt que d'avoir des appels fetch dispersés dans vos composants React, vous centralisez ces appels dans un service, ce qui rend votre code plus organisé et plus facile à maintenir.
-// src/services/api.js
-
-// src/services/api.js
 import {
   USER_MAIN_DATA,
   USER_ACTIVITY,
@@ -31,16 +27,12 @@ export const fetchUserData = async (userId) => {
       throw new Error('Failed to fetch user data');
     }
     const rawData = await response.json();
-    return standardizeUserData(rawData.data); // Standardisation avant de retourner les données
+    return standardizeUserData(rawData.data); // Accès aux données via .data
   } catch (error) {
-    console.error('Error fetching user data from API:', error);
-    // Utilisation des données mockées en cas de défaillance de l'API
+    console.error('Error fetching user data from API, using mock data instead:', error);
+    // Utilisation des données mockées en cas d'échec
     const mockData = USER_MAIN_DATA.find(user => user.id === userId);
-    if (mockData) {
-      return standardizeUserData(mockData);
-    } else {
-      throw new Error('Mock data not found');
-    }
+    return standardizeUserData(mockData);
   }
 };
 
@@ -52,18 +44,20 @@ export const fetchUserActivity = async (userId) => {
       throw new Error('Failed to fetch user activity');
     }
     const rawData = await response.json();
-    return rawData.data; // Retourne les données de l'API
-  } catch (error) {
-    console.error('Error fetching user activity from API:', error);
-    // Utilisation des données mockées en cas de défaillance de l'API
-    const mockData = USER_ACTIVITY.find(activity => activity.userId === userId);
-    if (mockData) {
-      return { data: mockData };
+    // Vérifie si les données sont encapsulées sous `data` comme attendu
+    if (rawData.data && rawData.data.sessions) {
+      return rawData.data.sessions;
     } else {
-      throw new Error('Mock activity data not found');
+      return rawData.sessions || rawData; // Fallback si pas d'encapsulation
     }
+  } catch (error) {
+    console.error('Error fetching user activity from API, using mock data instead:', error);
+    // Utilisation des données mockées en cas d'échec
+    const mockData = USER_ACTIVITY.find(activity => activity.userId === userId);
+    return mockData.sessions;
   }
 };
+
 
 // Récupérer les sessions moyennes d'un utilisateur
 export const fetchUserAverageSessions = async (userId) => {
@@ -73,18 +67,20 @@ export const fetchUserAverageSessions = async (userId) => {
       throw new Error('Failed to fetch user average sessions');
     }
     const rawData = await response.json();
-    return rawData.data; // Retourne les données de l'API
-  } catch (error) {
-    console.error('Error fetching user average sessions from API:', error);
-    // Utilisation des données mockées en cas de défaillance de l'API
-    const mockData = USER_AVERAGE_SESSIONS.find(session => session.userId === userId);
-    if (mockData) {
-      return { data: mockData };
+    // Vérifie si les données sont encapsulées sous `data` comme attendu
+    if (rawData.data && rawData.data.sessions) {
+      return rawData.data.sessions;
     } else {
-      throw new Error('Mock average sessions data not found');
+      return rawData.sessions || rawData; // Fallback si pas d'encapsulation
     }
+  } catch (error) {
+    console.error('Error fetching user average sessions from API, using mock data instead:', error);
+    // Utilisation des données mockées en cas d'échec
+    const mockData = USER_AVERAGE_SESSIONS.find(session => session.userId === userId);
+    return mockData.sessions;
   }
 };
+
 
 // Récupérer les performances d'un utilisateur
 export const fetchUserPerformance = async (userId) => {
@@ -94,15 +90,20 @@ export const fetchUserPerformance = async (userId) => {
       throw new Error('Failed to fetch user performance');
     }
     const rawData = await response.json();
-    return rawData.data; // Retourne les données de l'API
-  } catch (error) {
-    console.error('Error fetching user performance from API:', error);
-    // Utilisation des données mockées en cas de défaillance de l'API
-    const mockData = USER_PERFORMANCE.find(performance => performance.userId === userId);
-    if (mockData) {
-      return { data: mockData };
+    // Vérifie si les données sont encapsulées sous `data` comme attendu
+    if (rawData.data && rawData.data.kind && rawData.data.data) {
+      return rawData.data;
     } else {
-      throw new Error('Mock performance data not found');
+      return rawData; // Fallback si pas d'encapsulation
     }
+  } catch (error) {
+    console.error('Error fetching user performance from API, using mock data instead:', error);
+    // Utilisation des données mockées en cas d'échec
+    const mockData = USER_PERFORMANCE.find(performance => performance.userId === userId);
+    return {
+      kind: mockData.kind,
+      data: mockData.data
+    };
   }
 };
+
